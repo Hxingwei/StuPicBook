@@ -1,0 +1,17 @@
+extends ../layout-template
+
+block pageContent
+  form(role="form",action="#" enctype="multipart/form-data" method="post")
+    .form-group
+      label(for="folderOwner") 相册所属同学:
+      select.form-control#folderOwner(name="folderOwner")
+        each owner in folderOwners
+          option(value="#{owner}")  #{owner}
+    .form-group
+      label(for="pic") 要上传的图片:
+      input#pic(type="file",name="pic")
+    .form-group
+      label(for="picDesc") 图片描述:
+      textarea(cols="60",rows="3",name="picDesc")
+  button.btn.btn-primary(onclick="uploadPic(document.forms[0]);") 上传图片
+    

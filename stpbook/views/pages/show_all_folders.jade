@@ -1,0 +1,10 @@
+extends ../layout-template.jade
+
+block pageContent
+  .row
+    each item in folders
+      .col-xs-6.col-md-3
+        a.thumbnail(href="/#{item}")
+          img(src="/images/folder.png" title="#{item}的相册")
+          //- .caption
+          h4.text-center #{item}的相册

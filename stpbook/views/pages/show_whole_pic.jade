@@ -1,0 +1,48 @@
+extends ../layout-template
+
+block pageContent
+  ol.breadcrumb
+    li
+      a(href="/") 所有相册
+    li
+      a(href="/#{folderOwner}") #{folderOwner}的相册
+    li
+      a.active(href="/#{folderOwner}/#{pic}") #{pic} 
+  a.btn.btn-primary.btn-xs.pull-right(href="/#{folderOwner}") 返回上一级  
+  .row
+    .col-xs-12
+      img.center-block(src="/picdb/#{folderOwner}/#{pic}" style="height:200px")
+      form(role="form",action="/comment"  method="post")
+        input#pic(type="hidden",name="pic",value="#{pic}")
+        .form-group
+          label(for="user") 点评大师:
+          input#user(type="text",name="user")
+        .form-group
+          label(for="comment") 你的点评:
+          textarea#comment(cols="60",rows="3",name="comment")
+        button.btn.btn-primary(type="button",onclick="makeComment();") 发表评论
+        button.btn.btn-danger.pull-right(type="button",onclick="removeComment();") 清空评论
+        button.btn.btn-success.pull-right(type="button",onclick="loadComment('#{pic}');") 动态加载评论
+      
+      .alert.alert-success.text-center#successbox(role="alert") jflajdflajdfl
+      .alert.alert-danger.text-center#successbox(role="alert") jflajdflajdfl
+      
+      #comments-group.comments-group
+        each comment in comments
+          .list-group
+            a.list-group-item
+              p.pull-right #{comment.comment_time}
+              h4.list-group-item-heading #{comment.user}
+              p.list-group-item-text #{comment.comment}
+              
+      script#commentTPL(type="text/template")
+        a.list-group-item
+          p.pull-right <%=comment_time%>
+          h4.list-group-item-heading <%=user%>
+          p.list-group-item-text <%=comment%>
+            
+            
+              
+      
+          
+      

@@ -1,0 +1,15 @@
+extends ../layout-template
+
+block pageContent
+  ol.breadcrumb
+    li
+      a(href="/") 所有相册
+    li
+      a.active(href="/#{folderOwner}") #{folderOwner}的相册      
+  .row
+    each pic in folderPics
+      .col-xs-6.col-md-3
+        a.thumbnail(href="/#{folderOwner}/#{pic.pic_name}")
+          img(src="/picdb/#{folderOwner}/#{pic.pic_name}" title="#{pic.pic_desc}")
+          h4.text-center #{pic.pic_desc}
+        a.glyphicon.glyphicon-remove.remove_pic_icon(title="点击删除图片",href="/#{folderOwner}/#{pic.pic_name}/remove")
